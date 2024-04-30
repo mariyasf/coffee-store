@@ -1,6 +1,6 @@
 import nav from '/images/more/15.jpg'
 import logo from '/images/more/logo1.png'
-
+ 
 
 const NavBar = () => {
     return (
