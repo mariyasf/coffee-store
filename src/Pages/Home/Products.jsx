@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FaCoffee } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
