@@ -4,3 +4,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.primary-btn {
+    background: rgb(227, 181, 119);
+    padding: 10px;
+    border-radius: 10px;
+    width: 130px;
+}
+
+.primary-btn:hover {
+    border: 2px solid;
+    border-color: white;
+    color: white;
+    background: transparent;
+}
+
+.primary-btn2 {
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid rgb(51, 26, 21);
+    border-radius: 5px;
+    background: rgb(227, 181, 119);
+}
+
+.primary-btn2:hover {
+    box-sizing: border-box;
+    border: 2px solid rgb(51, 26, 21);
+    border-radius: 5px;
+    background: rgb(245, 244, 241);
+}
