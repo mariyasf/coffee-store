@@ -1,9 +1,23 @@
-import Swal from 'sweetalert2'
-import HomeButton from "./HomeButton";
 
-const AddCoffees = () => {
-    
-    const handleAddCoffee = e => {
+import { useLoaderData } from 'react-router-dom';
+import HomeButton from './HomeButton';
+import Swal from 'sweetalert2';
+
+const UpdateCoffee = () => {
+    const coffee = useLoaderData();
+
+    const {
+        _id,
+        name,
+        chef,
+        supplier,
+        taste,
+        category,
+        details,
+        photo
+    } = coffee;
+
+    const handleUpdateCoffee = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -13,7 +27,7 @@ const AddCoffees = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-        const newCoffee = {
+        const updatedCoffee = {
             name,
             chef,
             supplier,
@@ -22,44 +36,50 @@ const AddCoffees = () => {
             details,
             photo
         }
-        console.log(newCoffee);
+        console.log(updatedCoffee);
 
         // Send data to the server
-        fetch('http://localhost:5000/coffee', {
-            method: 'POST',
+        fetch(`http://localhost:5000/coffee/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newCoffee)
+            body: JSON.stringify(updatedCoffee)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
 
                     Swal.fire({
                         icon: "success",
                         title: "Sccess",
-                        text: 'Added successfully',
+                        text: 'Updatede successfully',
                         confirmButtonText: 'Ok'
                     });
                 }
             })
         form.reset();
+
+        form.reset();
     }
+
     return (
         <div className="lg:w-[1140px] mx-auto my-10">
             <HomeButton />
 
             <div className="bg-[#F4F3F0] flex flex-col items-center">
                 <div className="text-center space-y-5 py-20 px-10">
-                    <h2 className="font-Rancho text-4xl">Add New Coffee</h2>
-                    <p className="lg:w-[800px] mx-auto">It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.</p>
+                    <h2 className="font-Rancho text-4xl">Update Coffee Details</h2>
+                    <p className="lg:w-[800px] mx-auto">
+                        It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout.
+                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.
+                    </p>
 
                 </div>
 
                 <form
-                    onSubmit={handleAddCoffee}
+                    onSubmit={handleUpdateCoffee}
                     className="px-10 pb-10 lg:px-40  w-full">
 
                     <div className="flex flex-col lg:flex-row gap-10">
@@ -70,7 +90,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="name"
-                                required placeholder="Enter coffee name"
+                                defaultValue={name} placeholder="Enter coffee name"
                                 className="input input-bordered w-full" />
 
                         </label>
@@ -82,7 +102,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="chef"
-                                required placeholder="Enter coffee chef "
+                                defaultValue={chef} placeholder="Enter coffee chef "
                                 className="input input-bordered w-full" />
 
                         </label>
@@ -96,7 +116,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="supplier"
-                                required placeholder="Enter coffee supplier "
+                                defaultValue={supplier} placeholder="Enter coffee supplier "
                                 className="input input-bordered w-full" />
 
                         </label>
@@ -107,7 +127,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="taste"
-                                required placeholder="Enter coffee taste"
+                                defaultValue={taste} placeholder="Enter coffee taste"
                                 className="input input-bordered w-full" />
 
                         </label>
@@ -121,7 +141,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="category"
-                                required placeholder="nter coffee category"
+                                defaultValue={category} placeholder="nter coffee category"
                                 className="input input-bordered w-full" />
                         </label>
                         <label className="form-control md:w-1/2">
@@ -131,7 +151,7 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="details"
-                                required placeholder="Enter coffee details"
+                                defaultValue={details} placeholder="Enter coffee details"
                                 className="input input-bordered w-full" />
 
                         </label>
@@ -145,13 +165,13 @@ const AddCoffees = () => {
                             </div>
                             <input type="text"
                                 name="photo"
-                                required placeholder="Enter photo URL"
+                                defaultValue={photo} placeholder="Enter photo URL"
                                 className="input input-bordered w-full" />
 
                         </label>
 
 
-                        <input className="btn primary-btn2 w-full" type="submit" value="Add Coffee" />
+                        <input className="btn primary-btn2 w-full" type="submit" value="Update Coffee" />
 
                     </div>
 
@@ -164,4 +184,4 @@ const AddCoffees = () => {
     );
 };
 
-export default AddCoffees;
+export default UpdateCoffee;

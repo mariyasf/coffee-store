@@ -1,9 +1,45 @@
 import { FaEdit, FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CoffeCard = ({ coffee }) => {
-    const { photo, name, chef } = coffee;
+    const { _id, photo, name, chef } = coffee;
+    
+    const handleDelete = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
 
+
+                fetch(`http://localhost:5000/coffee/${id}`, {
+                    method: "DELETE",
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your coffee has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
+
+            }
+        });
+
+    }
     return (
         <div className="card card-side lg:p-5
          bg-[#F5F4F1]  shadow-xl flex flex-col lg:flex-row justify-between gap-5">
@@ -22,14 +58,22 @@ const CoffeCard = ({ coffee }) => {
                 </div>
 
                 <div className="text-xl space-y-4 text-white">
+
                     <div className="bg-[#D2B48C] w-8 h-8 flex text-center items-center justify-center">
-                        <FaEye />
+                        <Link to={`/seeDetails/${_id}`}>
+                            <FaEye />
+                        </Link>
+
                     </div>
                     <div className="bg-[#3C393B] w-8 h-8 flex text-center items-center justify-center">
-                        <FaEdit />
+                        <Link to={`/update/${_id}`}>
+                            <FaEdit />
+                        </Link>
                     </div>
-                    <div className="bg-[#EA4744] w-8 h-8 flex text-center items-center justify-center">
-                        <MdDelete />
+                    <div >
+                        <button onClick={() => handleDelete(_id)}
+                            className="bg-[#EA4744] w-8 h-8 flex text-center items-center justify-center"><MdDelete /></button>
+
                     </div>
 
                 </div>
