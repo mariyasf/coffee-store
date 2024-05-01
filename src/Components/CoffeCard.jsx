@@ -3,9 +3,9 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeCard = ({ coffee }) => {
+const CoffeCard = ({ coffee, coffees, setCoffees }) => {
     const { _id, photo, name, chef } = coffee;
-    
+
     const handleDelete = (id) => {
         console.log(id);
         Swal.fire({
@@ -33,6 +33,8 @@ const CoffeCard = ({ coffee }) => {
                                 icon: "success"
                             });
                         }
+                        const remaining = coffees.filter(coff => coff._id != _id);
+                        setCoffees(remaining);
                     })
 
 

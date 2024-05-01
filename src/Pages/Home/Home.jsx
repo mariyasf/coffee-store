@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import CoffeCard from '../../Components/CoffeCard';
 import Banner from './Banner';
 import Products from './Products';
 import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
-    const coffes = useLoaderData();
+    const lodedcoffes = useLoaderData();
+
+    const [coffees, setCoffees] = useState(lodedcoffes);
 
     return (
         <div>
@@ -15,8 +18,13 @@ const Home = () => {
             grid grid-cols-1  lg:grid-cols-2  gap-10
             '>
                 {
-                    coffes.map(coffee =>
-                        <CoffeCard key={coffee._id} coffee={coffee} />
+                    coffees.map(coffee =>
+                        <CoffeCard
+                            key={coffee._id}
+                            coffee={coffee}
+                            coffees={coffees}
+                            setCoffees={setCoffees}
+                        />
 
                     )
                 }
