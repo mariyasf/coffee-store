@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 import HomeButton from "./HomeButton";
 
 const AddCoffees = () => {
-    
+
     const handleAddCoffee = e => {
         e.preventDefault();
         const form = e.target;
@@ -25,7 +25,7 @@ const AddCoffees = () => {
         console.log(newCoffee);
 
         // Send data to the server
-        fetch('http://localhost:5000/coffee', {
+        fetch('https://coffee-store-server-livid-phi.vercel.app/coffee', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -5,6 +5,9 @@ import Home from "../Pages/Home/Home";
 import AddCoffees from "../Components/AddCoffees";
 import SeeDetails from "../Components/SeeDetails";
 import UpdateCoffee from "../Components/UpdateCoffee";
+import SignUp from "../Components/SignUp";
+import SignIn from "../Components/SignIn";
+import Users from "../Pages/Users/Users";
 
 const router = createBrowserRouter([
     {
@@ -15,7 +18,15 @@ const router = createBrowserRouter([
             {
                 path: "/home",
                 element: <Home />,
-                loader: () => fetch('http://localhost:5000/coffee'),
+                loader: () => fetch('https://coffee-store-server-livid-phi.vercel.app/coffee'),
+            },
+            {
+                path: "/signup",
+                element: <SignUp />
+            },
+            {
+                path: "/signin",
+                element: <SignIn />
             },
             {
                 path: "/addCoffee",
@@ -28,7 +39,13 @@ const router = createBrowserRouter([
             {
                 path: "/update/:id",
                 element: <UpdateCoffee />,
-                loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`),
+                loader: ({ params }) => fetch(`https://coffee-store-server-livid-phi.vercel.app/coffee/${params.id}`),
+
+            },
+            {
+                path: "/user",
+                element: <Users />,
+                loader: () => fetch('https://coffee-store-server-livid-phi.vercel.app/user'),
 
             },
 

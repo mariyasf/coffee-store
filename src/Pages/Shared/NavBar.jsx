@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import nav from '/images/more/15.jpg'
 import logo from '/images/more/logo1.png'
 
@@ -6,6 +6,7 @@ import logo from '/images/more/logo1.png'
 const NavBar = () => {
     const navLink = <>
         <li> <NavLink to={'/home'}>Home</NavLink> </li>
+        <li> <NavLink to={'/user'}>User</NavLink> </li>
     </>
     return (
         // <div className='relative'
@@ -40,7 +41,9 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <Link to={'/signup'}>
+                    <a className="btn">Sign Up</a>
+                </Link>
             </div>
         </ div>
 
